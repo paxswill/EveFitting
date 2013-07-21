@@ -1,8 +1,8 @@
 ﻿<?php
 
-class EveFittingMapIDArray {
+class EveFittingMapIDArray extends EveFittingEFTParser {
 
-	public static function pxEveFittingMapTypeIDArray( $name ) {
+	public static function EveFittingMapTypeID( $name ) {
 		if ( array_key_exists( $name, self::$typeids ) ) {
 			return self::$typeids[$name];
 		} else {
@@ -10,8 +10,9 @@ class EveFittingMapIDArray {
 		}
 	}
 
-	// 20640 ids. They could be significantly cut down (you're not fitting a 
-	// Sun to a ship), but this is kinda a PoC right now.
+	// 20640 ids. They could be significantly cut down (you're not fitting a
+	// Sun to a ship), but this is kinda a PoC right now. To save you the
+	// trouble of scrolling down, this is the last thing in the class.
 	public static $typeids = array(
 		"#System" => 0,
 		"Corporation" => 2,

@@ -11,19 +11,36 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 // Set the function to call for initial setup
-$wgHooks['ParserFirstCallInit'][] = 'pxEveFittingSetup';
+$wgHooks['ParserFirstCallInit'][] = 'EveFittingSetup';
 
 // Point to the other files
-$wgExtensionMessagesFiles['EveFitting'] = dirname(__FILE__) . 'EveFitting.i18n.php';
+$wgExtensionMessagesFiles['EveFitting'] =
+	dirname(__FILE__) . 'EveFitting.i18n.php';
 
 $wgEveFittingIncludes = dirname(__FILE__) . '/includes';
-$wgAutoloadClasses['EveFittingEFTParser'] = $wgEveFittingIncludes . 'EveFittingEFTParser.php';
-$wgAutoloadClasses['EveFittingMapIDArray'] = $wgEveFittingIncludes . 'EveFittingMapIDArray.php';
+$wgAutoloadClasses['EveFittingEFTParser'] =
+	$wgEveFittingIncludes . 'EveFittingEFTParser.php';
+$wgAutoloadClasses['EveFittingMapIDArray'] =
+	$wgEveFittingIncludes . 'EveFittingMapIDArray.php';
+
+/*
+ * Configuration variables
+ *
+ * $wgEveFittingTypeIDMapper
+ *         - choose which cmethod to use to map names to typeIDs. Currently
+ *           only 'array' is supported.
+ *           Default: 'array'
+ */
+$wgEveFittingTypeIDMapper = 'array';
 
 // Setup the parser extension
-function pxEveFittingSetup( &$parser) {
+function EveFittingSetup( &$parser) {
 	// Add the parsing hook in
-	$parser->setFunctionHook( 'EFT', 'EveFittingEFTParser::EveFittingRender' );
-	// Assume that worked
+	if ( $wgEveFittingTypeIDMapper == 'array' ) {
+		$parser->setFunctionHook( 'EFT',
+			'EveFittingMapIDArray::EveFittingRender' );
+	} else {
+		// TODO Alert to the invalid config value
+	}
 	return true;
 }

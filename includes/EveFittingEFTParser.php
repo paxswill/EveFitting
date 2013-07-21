@@ -5,8 +5,8 @@ class EveFittingEFTParser {
 	public static function EveFittingRender( $parser, $eftFit ) {
 		/*
 		 *
-		 * $eftFit is the raw input output of the copy to pasteboard function from 
-		 * EFT. The format is:
+		 * $eftFit is the raw input output of the copy to pasteboard function
+		 * from EFT. The format is:
 		[{ship_type}, {fit_name}]
 		
 		{low_slots}
@@ -32,9 +32,10 @@ class EveFittingEFTParser {
 		
 		{drones}
 
-		* Text enclosed in braces is variable text. Unused slots/rigs are specified 
-		* by special tokens. There are two lines between the last high slot (or 
-		* subsystem on T3 cruisers) and the start of the drones section.
+		* Text enclosed in braces is variable text. Unused slots/rigs are
+		* specified by special tokens. There are two lines between the last
+		* high slot (or subsystem on T3 cruisers) and the start of the drones
+		* section.
 		*/
 
 		// Normalize \r\n to \n
@@ -49,7 +50,7 @@ class EveFittingEFTParser {
 		$trimmed = substr( $line, 1, -1 );
 		// Extract the ship name and the fit name
 		list( $shipName, $fitName ) = explode( ", ", $trimmed );
-		$shipID = self::EveFittingMapTypeID( $shipName );
+		$shipID = static::EveFittingMapTypeID( $shipName );
 
 		// Parse the items
 		$sections = array();
@@ -68,13 +69,13 @@ class EveFittingEFTParser {
 			// Split items from charges
 			list( $item, $charge ) = explode( ", ", $line );
 			// Get the itemID for the item name and save it for later
-			$itemID = self::EveFittingMapTypeID( $item );
+			$itemID = static::EveFittingMapTypeID( $item );
 			if ( $itemID >= 0 ) {
 				$current[] = $itemID;
 			}
 			// Save the charge for the end
 			if ( $charge != "" ) {
-				$chargeID = self::EveFittingMapTypeID( $charge );
+				$chargeID = static::EveFittingMapTypeID( $charge );
 				if ( $chargeID >= 0 ) {
 					$charges[] = $chargeID;
 				}
@@ -91,7 +92,8 @@ class EveFittingEFTParser {
 
 		// If there are drones, ignore them
 		$count = count( $sections );
-		if ( count( $sections[$count - 2] ) == 0 && count( $sections[$count - 3] ) == 0) {
+		if ( count( $sections[$count - 2] ) == 0 &&
+			 count( $sections[$count - 3] ) == 0) {
 			pop($sections);
 			pop($sections);
 			pop($sections);
@@ -99,7 +101,11 @@ class EveFittingEFTParser {
 
 		$dna = $shipID;
 		// T3 cruisers have subsystems, which will show up as an extra section
-		if ( $shipID == 29984 || $shipID == 29986 || $shipID == 29988 || $shipID == 29990 ) {
+		// The numbers are the typeIDs for the four T3 cruisers.
+		if ( $shipID == 29984 ||
+			 $shipID == 29986 ||
+			 $shipID == 29988 ||
+			 $shipID == 29990 ) {
 			$subsystems = pop( $sections );
 			foreach ( $subsystems as $subsystem ) {
 				$dna = $dna . ":" . $subsystem;
@@ -149,6 +155,6 @@ class EveFittingEFTParser {
 	}
 
 	public static function EveFittingMapTypeID( $name ) {
-		// Maps an exact string to an Eve typeID
+		// A dummy function, meant to be overloaded
 		return -1;
 	}
