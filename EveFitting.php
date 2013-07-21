@@ -16,10 +16,9 @@ $wgHooks['ParserFirstCallInit'][] = 'pxEveFittingSetup';
 // Point to the other files
 $wgExtensionMessagesFiles['EveFitting'] = dirname(__FILE__) . 'EveFitting.i18n.php';
 
-$pxEveFittingIncludes = dirname(__FILE__) . '/includes';
-$wgAutoloadClasses['EveFittingEFTParser'] = $pxEveFittingIncludes . 'EveFittingEFTParser.php';
-$wgAutoloadClasses['EveFittingMapIDArray'] = $pxEveFittingIncludes . 'EveFittingMapIDArray.php';
-
+$wgEveFittingIncludes = dirname(__FILE__) . '/includes';
+$wgAutoloadClasses['EveFittingEFTParser'] = $wgEveFittingIncludes . 'EveFittingEFTParser.php';
+$wgAutoloadClasses['EveFittingMapIDArray'] = $wgEveFittingIncludes . 'EveFittingMapIDArray.php';
 
 // Setup the parser extension
 function pxEveFittingSetup( &$parser) {
