@@ -11,20 +11,20 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 // Set the function to call for initial setup
-$wgHooks['ParserFirstCallInit'][] = 'EveFittingSetup';
+$wgHooks['ParserFirstCallInit'][] = 'pxEveFittingSetup';
 
 // Set up translation
 $wgExtensionMessagesFiles['EveFitting'] = dirname(__FILE__) . 'EveFitting.i18n.php';
 
 // Setup the parser extension
-function EveFittingSetup( &$parser) {
+function pxEveFittingSetup( &$parser) {
 	// Add the parsing hook in
-	$parser->setFunctionHook( 'evefitting', 'EveFittingRender' );
+	$parser->setFunctionHook( 'EFT', 'pxEveFittingRender' );
 	// Assume that worked
 	return true;
 }
 
-function EveFittingRender( $parser, $eftFit ) {
+function pxEveFittingRender( $parser, $eftFit ) {
 	/*
 	 *
 	 * $eftFit is the raw input output of the copy to pasteboard function from 
@@ -62,7 +62,7 @@ function EveFittingRender( $parser, $eftFit ) {
 	return ''
 }
 
-function EveFittingMapTypeID( $name ) {
+function pxEveFittingMapTypeID( $name ) {
 	// Maps an exact string to an Eve typeID
+	return -1;
 }
-
