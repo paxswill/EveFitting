@@ -15,7 +15,7 @@ $wgHooks['ParserFirstCallInit'][] = 'EveFittingSetup';
 
 // Point to the other files
 $wgExtensionMessagesFiles['EveFitting'] =
-	dirname(__FILE__) . 'EveFitting.i18n.php';
+	dirname(__FILE__) . '/EveFitting.i18n.php';
 
 $wgEveFittingIncludes = dirname(__FILE__) . '/includes';
 $wgAutoloadClasses['EveFittingEFTParser'] =
