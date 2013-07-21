@@ -110,6 +110,10 @@ class EveFittingEFTParser {
 			foreach ( $subsystems as $subsystem ) {
 				$dna = $dna . ":" . $subsystem;
 			}
+			// There must always be 5 subsystems
+			for ( $i = count( $subsystems ); $i <= 5; $i++ ){
+				$dna = $dna . ":";
+			}
 		}
 
 		// Rigs have to go last, save them for later
