@@ -10,9 +10,6 @@ $wgExtensionCredits['parserhook'][] = array(
 	'url' => 'http://paxswill.com',
 );
 
-// Set the function to call for initial setup
-$wgHooks['ParserFirstCallInit'][] = 'EveFittingSetup';
-
 // Point to the other files
 
 $wgEveFittingIncludes = dirname(__FILE__) . '/includes';
@@ -31,16 +28,12 @@ $wgAutoloadClasses['EveFittingMapIDArray'] =
  */
 $wgEveFittingTypeIDMapper = 'array';
 
-// Setup the parser extension
-function EveFittingSetup( &$parser) {
-	// Add the parsing hook in
-	if ( $wgEveFittingTypeIDMapper == 'array' ) {
-		$parser->setFunctionHook( 'EFT',
-			'EveFittingMapIDArray::EveFittingRender' );
-	} else {
-		// TODO Alert to the invalid config value
-	}
-	return true;
+// Set which typeID mapper to use
+if ( $wgEveFittingTypeIDMapper == 'array' ) {
+	$wgHooks['ParserFirstCallInit'][] =
+		'EveFittingMapIDArray::EveFittingRegisterParser';
+} else {
+	// TODO Alert to the invalid config value
 }
 
 // Internationalization and magic words

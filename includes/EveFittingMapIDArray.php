@@ -2,6 +2,13 @@
 
 class EveFittingMapIDArray extends EveFittingEFTParser {
 
+	public static function EveFittingRegisterParser( &$parser ) {
+		// Stub function that registers the actual parser function
+		$parser->setFunctionHook( 'EFT',
+			'EveFittingMapIDArray::EveFittingRender' );
+		return true;
+	}
+
 	public static function EveFittingMapTypeID( $name ) {
 		if ( array_key_exists( $name, self::$typeids ) ) {
 			return self::$typeids[$name];
