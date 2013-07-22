@@ -15,16 +15,16 @@ $wgHooks['ParserFirstCallInit'][] = 'wfEveFitting';
 
 // Point to the other files
 // Internationalization and magic words
+$wgEveFittingDir = dirname(__FILE__);
 $wgExtensionMessagesFiles['EveFitting'] =
-	dirname(__FILE__) . '/EveFitting.i18n.php';
-$wgEveFittingIncludes = dirname(__FILE__) . '/includes';
+	$wgEveFittingDir . '/EveFitting.i18n.php';
 // Autoload classes
 $wgAutoloadClasses['EveFittingEFTParser'] =
-	$wgEveFittingIncludes . '/EveFittingEFTParser.php';
+	$wgEveFittingDir . '/EveFittingEFTParser.php';
 $wgAutoloadClasses['EveFittingMapIDArray'] =
-	$wgEveFittingIncludes . '/EveFittingMapIDArray.php';
+	$wgEveFittingDir . '/EveFittingMapIDArray.php';
 $wgAutoloadClasses['EveFittingMapSQL'] =
-	$wgEveFittingIncludes . '/EveFittingMapSQL.php';
+	$wgEveFittingDir . '/EveFittingMapSQL.php';
 
 /*
  * Configuration variables
