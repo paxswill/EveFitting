@@ -147,7 +147,8 @@ class EveFittingEFTParser {
 		$dna = $dna . ":";
 
 		// Make the anchor (link) tag that'll open the fitting window
-		$dnaAnchor = "<a href=\"javascript:CCPEVE.showFitting('" . $dna . "')>";
+		$dnaAnchor =
+			"<a href=\"javascript:CCPEVE.showFitting('" . $dna . "')\">";
 
 		// Return the EFT block with the first line being a link to open the
 		// fitting in game.
