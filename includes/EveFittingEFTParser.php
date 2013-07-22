@@ -160,7 +160,7 @@ class EveFittingEFTParser {
 		} else {
 			$chargeQuantities = array_count_values( $charges );
 			foreach ( $chargeQuantities as $charge => $quantity ) {
-				$dna = $dna . $charge . ";" . $quantity . ":";
+				$dna = $dna . ":" . $charge . ";" . $quantity;
 			}
 		}
 
