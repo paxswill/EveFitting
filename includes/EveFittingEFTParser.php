@@ -64,7 +64,7 @@ class EveFittingEFTParser {
 				// Add a blank new section
 				$current = array();
 				$sections[] = &$current;
-				break;
+				continue;
 			}
 			// Split items from charges
 			list( $item, $charge ) = explode( ", ", $line );
