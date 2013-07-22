@@ -121,8 +121,8 @@ class EveFittingEFTParser {
 				$dna = $dna . ":" . $subsystem . ";1";
 			}
 			// There must always be 5 subsystems
-			for ( $i = count( $subsystems ); $i <= 5; $i++ ){
-				$dna = $dna . ":";
+			for ( $i = count( $subsystems ); $i < 5; $i++ ){
+				$dna = $dna . ":;";
 			}
 		}
 
