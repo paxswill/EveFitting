@@ -1,6 +1,6 @@
 <?php
 
-abstract class EveFittingEFTParser {
+class EveFittingEFTParser {
 
 	public static function EveFittingRender( $parser, $eftFit ) {
 		/*
@@ -180,5 +180,8 @@ abstract class EveFittingEFTParser {
 		return array( $eftFitLink, 'isHTML' => true );
 	}
 
-	abstract public static function EveFittingMapTypeID( $name );
+	public static function EveFittingMapTypeID( $name ) {
+		// A dummy function, meant to be overloaded
+		return -1;
+	}
 }
