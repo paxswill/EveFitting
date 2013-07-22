@@ -116,7 +116,9 @@ class EveFittingEFTParser {
 			 $shipID == 29990 ) {
 			$subsystems = array_pop( $sections );
 			foreach ( $subsystems as $subsystem ) {
-				$dna = $dna . ":" . $subsystem;
+				// The documentation on the EveO wiki is wrong, you need a
+				// quantity of 1 on subsystems
+				$dna = $dna . ":" . $subsystem . ";1";
 			}
 			// There must always be 5 subsystems
 			for ( $i = count( $subsystems ); $i <= 5; $i++ ){
