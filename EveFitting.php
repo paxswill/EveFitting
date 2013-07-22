@@ -48,14 +48,15 @@ $wgAutoloadClasses['EveFittingMapSQL'] =
  *           Default: ''
  *
  * $wgEveFittingDatabaseOptions
- *         - Connection options to use if using the 'sql' mapper.
- *           Default: ''
+ *         - Connection options to use if using the 'sql' mapper. Enabling
+ *           persistent connections is highly recommended.
+ *           Default: 'array( 'PDO::ATTR_PERSISTENT' => true )
  */
 $wgEveFittingTypeIDMapper = 'array';
 $wgEveFittingDatabaseDSN = '';
 $wgEveFittingDatabaseUsername = '';
 $wgEveFittingDatabasePassword = '';
-$wgEveFittingDatabaseOptions = '';
+$wgEveFittingDatabaseOptions = array ( 'PDO::ATTR_PERSISTENT' => true );
 
 function wfEveFitting( &$parser ) {
 	global $wgEveFittingTypeIDMapper;
