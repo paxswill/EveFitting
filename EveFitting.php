@@ -21,8 +21,8 @@ $wgExtensionMessagesFiles['EveFitting'] =
 // Autoload classes
 $wgAutoloadClasses['EveFittingEFTParser'] =
 	$wgEveFittingDir . '/EveFittingEFTParser.php';
-$wgAutoloadClasses['EveFittingMapIDArray'] =
-	$wgEveFittingDir . '/EveFittingMapIDArray.php';
+$wgAutoloadClasses['EveFittingMapArray'] =
+	$wgEveFittingDir . '/EveFittingMapArray.php';
 $wgAutoloadClasses['EveFittingMapSQL'] =
 	$wgEveFittingDir . '/EveFittingMapSQL.php';
 
@@ -65,7 +65,7 @@ function wfEveFitting( &$parser ) {
 	// Set which typeID mapper to use
 	if ( $wgEveFittingTypeIDMapper == 'array' ) {
 		$parser->setFunctionHook( 'EFT',
-			'EveFittingMapIDArray::EveFittingRender' );
+			'EveFittingMapArray::EveFittingRender' );
 	} elseif ( $wgEveFittingTypeIDMapper == 'sql' ) {
 		wfDebug( "EFT: Using SQL mapper" );
 		$parser->setFunctionHook( 'EFT',
