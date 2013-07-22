@@ -5,9 +5,9 @@ $wgExtensionCredits['parserhook'][] = array(
 	'path' => __FILE__,
 	'name' => 'Eve Fitting Parsing Function',
 	'description' => 'Adds a parser function under #EFT for formatting Eve Fitting Tool style blocks',
-	'version' => '0.0.1a',
-	'author' => 'paxswill',
-	'url' => 'http://paxswill.com',
+	'version' => '0.0.2',
+	'author' => 'Will Ross',
+	'url' => 'https://github.com/paxswill/EveFitting',
 );
 
 $wgHooks['ParserFirstCallInit'][] = 'wfEveFitting';
