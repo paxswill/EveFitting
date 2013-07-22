@@ -121,6 +121,8 @@ class EveFittingEFTParser {
 		}
 
 		// Rigs have to go last, save them for later
+		// FIXME The rig stuff is bugged. It works for now, but could
+		// (probably) break later.
 		$rigs = array_pop($sections);
 
 		// Consolidate and count modules
@@ -147,8 +149,16 @@ class EveFittingEFTParser {
 			}
 		}
 
-		// TODO Add charges
-		$dna = $dna . ":";
+		// Handle charges (ammo+drones)
+		if ( count( $charges ) == 0 ) {
+			// Even if there're no charges, add an empty entry
+			$dna = $dna . ":";
+		} else {
+			$chargeQuantities = array_count_values( $charges );
+			foreach ( $chargeQuantities as $charge => $quantity ) {
+				$dna = $dna . $charge . ";" . $quantity . ":";
+			}
+		}
 
 		// Make the anchor (link) tag that'll open the fitting window
 		$dnaAnchor =
