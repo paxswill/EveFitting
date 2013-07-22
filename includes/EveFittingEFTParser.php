@@ -114,7 +114,7 @@ class EveFittingEFTParser {
 			 $shipID == 29986 ||
 			 $shipID == 29988 ||
 			 $shipID == 29990 ) {
-			$subsystems = pop( $sections );
+			$subsystems = array_pop( $sections );
 			foreach ( $subsystems as $subsystem ) {
 				$dna = $dna . ":" . $subsystem;
 			}
