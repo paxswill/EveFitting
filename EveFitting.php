@@ -19,9 +19,9 @@ $wgExtensionMessagesFiles['EveFitting'] =
 
 $wgEveFittingIncludes = dirname(__FILE__) . '/includes';
 $wgAutoloadClasses['EveFittingEFTParser'] =
-	$wgEveFittingIncludes . 'EveFittingEFTParser.php';
+	$wgEveFittingIncludes . '/EveFittingEFTParser.php';
 $wgAutoloadClasses['EveFittingMapIDArray'] =
-	$wgEveFittingIncludes . 'EveFittingMapIDArray.php';
+	$wgEveFittingIncludes . '/EveFittingMapIDArray.php';
 
 /*
  * Configuration variables
