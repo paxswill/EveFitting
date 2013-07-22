@@ -23,15 +23,40 @@ $wgAutoloadClasses['EveFittingMapIDArray'] =
  *
  * $wgEveFittingTypeIDMapper
  *         - choose which cmethod to use to map names to typeIDs. Currently
- *           only 'array' is supported.
+ *           supported options are 'array' and 'sql'.
  *           Default: 'array'
+ *
+ * $wgEveFittingDatabaseDSN
+ *         - If using the 'sql' typeID mapper, specify the DSN of the database
+ *           to connect to here.
+ *           Default: ''
+ *
+ * $wgEveFittingDatabaseUsername
+ *         - The username to use to connect to the database if using the 'sql'
+ *           mapper.
+ *           Default: ''
+ *
+ * $wgEveFittingDatabasePassword
+ *         - The password to connect to the database if using the 'sql' mapper.
+ *           Default: ''
+ *
+ * $wgEveFittingDatabaseOptions
+ *         - Connection options to use if using the 'sql' mapper.
+ *           Default: ''
  */
 $wgEveFittingTypeIDMapper = 'array';
+$wgEveFittingDatabaseDSN = '';
+$wgEveFittingDatabaseUsername = '';
+$wgEveFittingDatabasePassword = '';
+$wgEveFittingDatabaseOptions = '';
 
 // Set which typeID mapper to use
 if ( $wgEveFittingTypeIDMapper == 'array' ) {
 	$wgHooks['ParserFirstCallInit'][] =
 		'EveFittingMapIDArray::EveFittingRegisterParser';
+} elseif ( $wgEveFittingTypeIDMapper == 'sql' ) {
+	$wgHooks['ParserFirstCallInit'][] =
+		'EveFittingMapSQL::EveFittingRegisterParser';
 } else {
 	// TODO Alert to the invalid config value
 }
