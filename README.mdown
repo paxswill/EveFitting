@@ -1,0 +1,97 @@
+# Eve Fitting Block
+
+This is a [MediaWiki][mwiki] extension that adds a function to the parser for
+[Eve Fitting Tool (EFT)][eft] style fittings. It ensures line breaks are
+properly preserved and turns the header into a link for the in-game browser
+that will open a fitting window in game when clicked.
+
+[mwiki]:http://www.mediawiki.org/
+[eft]: https://forums.eveonline.com/default.aspx?g=posts&t=24359
+
+## Requirements
+
+* MediaWiki >=1.17.0
+
+* PHP >=5.3.0
+
+* PDO and a PDO extension for your database (optional)
+
+## Installation
+
+Like other MediaWiki extensions, simply place the EveFitting directory in the
+`extensions` directory in the base of your MediaWiki installation. Then, add
+this line to the end of your LocalSettings.php:
+
+    require_once "$IP/extensions/EveFitting/EveFitting.php";
+
+## Configuration
+
+There are two methods provided for mapping item type names to the typeIDs used
+in-game. `array` uses a large array for mapping the item names to the IDs,
+while `sql` uses a database with the [Eve Static Data Export][sde] on it. The
+`sql` method is preferred, as it uses about 3MB less memory per uncached
+request.
+
+[sde]: http://community.eveonline.com/community/fansites/toolkit/
+
+To select a mapper, set `$wgEveFittingTypeIDMapper` to either `'array'` or to
+`'sql'` in LocalSettings.php.
+
+### Database
+
+If you are using the `sql` mapper, you need to provide the connection details
+for your database. The names should be fairly self-explanatory:
+
+* `$wgEveFittingDatabaseDSN` is the DSN for your database. An example for
+  MySQL: `mysql:host=127.0.0.1;port=8889;dbname=eve_sde`
+
+* `$wgEveFittingDatabaseUsername` is the username required to connect to the
+  database.
+
+* `$wgEveFittingDatabasePassword` is the password for the previously specified
+  user.
+
+* `$wgEveFittingDatabaseOptions` is an array of any database options you may
+  need. It is preferable to simply append to this as there may be options
+  preconfigured.
+
+The only table needed in the database is invTypes, and the only columns used
+are typeID and typeName.
+
+## Usage
+
+Wrap your EFT block in `{{#EFT:` and `}}`. You don't need to add `<br />` to
+the end of lines, the extension takes care of that. It also doesn't care if
+you've already added them, it discards them.
+
+Example:
+
+    {{#EFT:[Viator, Speedy Viator]
+    
+    Nanofiber Internal Structure II
+    Nanofiber Internal Structure II
+    Nanofiber Internal Structure II
+    
+    10MN Microwarpdrive II
+    Adaptive Invulnerability Field II
+    Adaptive Invulnerability Field II
+    
+    Covert Ops Cloaking Device II
+    
+    Medium Cargohold Optimization I
+    Medium Cargohold Optimization I}}
+
+Result:
+
+> <p><a href="javascript:CCPEVE.showFitting('12743:2605;3:12076;1:2281;2:11578;1:31119;2:')">[Viator, Speedy Viator]</a><br /><br />Nanofiber Internal Structure II<br />Nanofiber Internal Structure II<br />Nanofiber Internal Structure II<br /><br />10MN Microwarpdrive II<br />Adaptive Invulnerability Field II<br />Adaptive Invulnerability Field II<br /><br />Covert Ops Cloaking Device II<br /><br />Medium Cargohold Optimization I<br />Medium Cargohold Optimization I
+</p>
+
+Clicking the link ("[Viator, Speedy Viator]") in the in-game browser will
+open an in-game fitting window.
+
+
+## Known Issues
+
+* The in-game fitting window will show "truncated" in red, but no items are
+  missing.
+
