@@ -14,8 +14,6 @@ $wgExtensionCredits['parserhook'][] = array(
 $wgHooks['ParserFirstCallInit'][] = 'EveFittingSetup';
 
 // Point to the other files
-$wgExtensionMessagesFiles['EveFitting'] =
-	dirname(__FILE__) . '/EveFitting.i18n.php';
 
 $wgEveFittingIncludes = dirname(__FILE__) . '/includes';
 $wgAutoloadClasses['EveFittingEFTParser'] =
@@ -44,3 +42,7 @@ function EveFittingSetup( &$parser) {
 	}
 	return true;
 }
+
+// Internationalization and magic words
+$wgExtensionMessagesFiles['EveFitting'] =
+	dirname(__FILE__) . '/EveFitting.i18n.php';
