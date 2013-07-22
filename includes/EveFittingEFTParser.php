@@ -66,7 +66,7 @@ class EveFittingEFTParser {
 				continue;
 			}
 			// Split items from charges
-			$exploded = explode( ", ", $line, 1 );
+			$exploded = explode( ", ", $line );
 			// Drones count as a charge, but are signified by their quantity
 			// being in the form 'Drone_Name x#'
 			if ( preg_match( "/(.+) x([\d+])$/",
@@ -86,7 +86,7 @@ class EveFittingEFTParser {
 				}
 				// Save the charge for the end
 				if ( count( $exploded ) > 1 ) {
-					$chargeID = static::EveFittingMapTypeID( $charge );
+					$chargeID = static::EveFittingMapTypeID( $exploded[1] );
 					if ( $chargeID >= 0 ) {
 						$charges[] = $chargeID;
 					}
