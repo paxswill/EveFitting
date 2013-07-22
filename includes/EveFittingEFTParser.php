@@ -156,7 +156,7 @@ class EveFittingEFTParser {
 
 		// MediaWiki magic. tells Mediawiki that I'm returning HTML, and not to
 		// mess with it.
-		return array( $output, 'noparse' => true, 'isHTML' => true );
+		return array( $eftFitLink, 'isHTML' => true );
 	}
 
 	public static function EveFittingMapTypeID( $name ) {
