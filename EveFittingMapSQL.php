@@ -27,10 +27,8 @@ class EveFittingMapSQL extends EveFittingEFTParser {
 		// Get results
 		$typeID = $stmt->fetch( PDO::FETCH_NUM );
 		if ( $typeID !== FALSE ) {
-			wfDebug( "EFT: Mapped '" . $name . "' to '" . $typeID[0] . "'" );
 			$typeID = intval( $typeID[0] );
 		} else {
-			wfDebug( "EFT: Mapping failed for '" . $name . "'" );
 			$typeID = -1;
 		}
 		// Close out the cursor to let it be used again

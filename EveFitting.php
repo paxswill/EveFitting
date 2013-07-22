@@ -67,7 +67,6 @@ function wfEveFitting( &$parser ) {
 		$parser->setFunctionHook( 'EFT',
 			'EveFittingMapArray::EveFittingRender' );
 	} elseif ( $wgEveFittingTypeIDMapper == 'sql' ) {
-		wfDebug( "EFT: Using SQL mapper" );
 		$parser->setFunctionHook( 'EFT',
 			'EveFittingMapSQL::EveFittingRender' );
 	} else {
