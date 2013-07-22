@@ -12,8 +12,6 @@ that will open a fitting window in game when clicked.
 
 * MediaWiki >=1.17.0
 
-* PHP >=5.3.0
-
 * PDO and a PDO extension for your database (optional)
 
 ## Installation
