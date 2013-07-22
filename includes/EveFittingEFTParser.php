@@ -57,13 +57,12 @@ class EveFittingEFTParser {
 		$charges = array();
 		// Prime the section array
 		$current = array();
-		$sections[] = &$current;
 		foreach ( $lines as $line ) {
 			// If on a blank line, it's a divider between sections
 			if ( $line == "" ) {
 				// Add a blank new section
+				$sections[] = $current;
 				$current = array();
-				$sections[] = &$current;
 				continue;
 			}
 			// Split items from charges
@@ -81,6 +80,7 @@ class EveFittingEFTParser {
 				}
 			}
 		}
+		$sections[] = $current;
 
 		// Recombine the lines, using <br /> as a line break instead of \n
 		$fixedEFT = implode( '<br />', $lines );
