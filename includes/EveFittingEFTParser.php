@@ -123,10 +123,6 @@ class EveFittingEFTParser {
 				// quantity of 1 on subsystems
 				$dna = $dna . ":" . $subsystem . ";1";
 			}
-			// There must always be 5 subsystems
-			for ( $i = count( $subsystems ); $i < 5; $i++ ){
-				$dna = $dna . ":;";
-			}
 		}
 
 		// Rigs have to go last, save them for later
