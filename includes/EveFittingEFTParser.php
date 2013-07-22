@@ -41,8 +41,12 @@ class EveFittingEFTParser {
 		// Normalize \r\n to \n
 		$nixBreaks = str_replace( "\r\n", "\n", $eftFit );
 
+		// Discard any manual line breaks already added
+		$nobrs = str_replace( array( "<br />\n", "<br />" ), array( "\n" ),
+			$nixBreaks );
+
 		// split the fit into seperate lines
-		$lines = explode( "\n", $nixBreaks );
+		$lines = explode( "\n", $nobrs );
 
 		// The first line is the ship type and fitting name in a special format
 		$firstLine = array_shift( $lines );
