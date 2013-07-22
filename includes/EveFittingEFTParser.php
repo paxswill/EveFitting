@@ -47,7 +47,7 @@ class EveFittingEFTParser {
 		// The first line is the ship type and fitting name in a special format
 		$firstLine = array_shift( $lines );
 		// Trim the brackets off
-		$trimmed = substr( $line, 1, -1 );
+		$trimmed = substr( $firstLine, 1, -1 );
 		// Extract the ship name and the fit name
 		list( $shipName, $fitName ) = explode( ", ", $trimmed );
 		$shipID = static::EveFittingMapTypeID( $shipName );
