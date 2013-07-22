@@ -163,3 +163,4 @@ class EveFittingEFTParser {
 		// A dummy function, meant to be overloaded
 		return -1;
 	}
+}
