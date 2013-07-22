@@ -155,7 +155,7 @@ class EveFittingEFTParser {
 		}
 
 		// Rigs have to go last, save them for later
-		$rigs = array_pop($sections);
+		$rigs = array_pop( $sections );
 
 		// Consolidate and count modules
 		$allSections = array();

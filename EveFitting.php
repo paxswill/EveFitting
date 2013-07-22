@@ -40,7 +40,7 @@ $wgExtensionCredits['parserhook'][] = array(
 	'url' => 'https://github.com/paxswill/EveFitting',
 );
 
-$wgHooks['ParserFirstCallInit'][] = 'wfEveFitting';
+$wgHooks['ParserFirstCallInit'][] = 'efEveFitting';
 
 // Point to the other files
 // Internationalization and magic words
@@ -88,7 +88,7 @@ $wgEveFittingDatabaseUsername = '';
 $wgEveFittingDatabasePassword = '';
 $wgEveFittingDatabaseOptions = array ( 'PDO::ATTR_PERSISTENT' => true );
 
-function wfEveFitting( &$parser ) {
+function efEveFitting( &$parser ) {
 	global $wgEveFittingTypeIDMapper;
 
 	// Set which typeID mapper to use
