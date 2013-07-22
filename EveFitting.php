@@ -10,13 +10,20 @@ $wgExtensionCredits['parserhook'][] = array(
 	'url' => 'http://paxswill.com',
 );
 
-// Point to the other files
+$wgHooks['ParserFirstCallInit'][] = 'wfEveFitting';
 
+// Point to the other files
+// Internationalization and magic words
+$wgExtensionMessagesFiles['EveFitting'] =
+	dirname(__FILE__) . '/EveFitting.i18n.php';
 $wgEveFittingIncludes = dirname(__FILE__) . '/includes';
+// Autoload classes
 $wgAutoloadClasses['EveFittingEFTParser'] =
 	$wgEveFittingIncludes . '/EveFittingEFTParser.php';
 $wgAutoloadClasses['EveFittingMapIDArray'] =
 	$wgEveFittingIncludes . '/EveFittingMapIDArray.php';
+$wgAutoloadClasses['EveFittingMapSQL'] =
+	$wgEveFittingIncludes . '/EveFittingMapSQL.php';
 
 /*
  * Configuration variables
@@ -50,17 +57,19 @@ $wgEveFittingDatabaseUsername = '';
 $wgEveFittingDatabasePassword = '';
 $wgEveFittingDatabaseOptions = '';
 
-// Set which typeID mapper to use
-if ( $wgEveFittingTypeIDMapper == 'array' ) {
-	$wgHooks['ParserFirstCallInit'][] =
-		'EveFittingMapIDArray::EveFittingRegisterParser';
-} elseif ( $wgEveFittingTypeIDMapper == 'sql' ) {
-	$wgHooks['ParserFirstCallInit'][] =
-		'EveFittingMapSQL::EveFittingRegisterParser';
-} else {
-	// TODO Alert to the invalid config value
-}
+function wfEveFitting( &$parser ) {
+	global $wgEveFittingTypeIDMapper;
 
-// Internationalization and magic words
-$wgExtensionMessagesFiles['EveFitting'] =
-	dirname(__FILE__) . '/EveFitting.i18n.php';
+	// Set which typeID mapper to use
+	if ( $wgEveFittingTypeIDMapper == 'array' ) {
+		$parser->setFunctionHook( 'EFT',
+			'EveFittingMapIDArray::EveFittingRender' );
+	} elseif ( $wgEveFittingTypeIDMapper == 'sql' ) {
+		wfDebug( "EFT: Using SQL mapper" );
+		$parser->setFunctionHook( 'EFT',
+			'EveFittingMapSQL::EveFittingRender' );
+	} else {
+		// TODO Alert to the invalid config value
+	}
+	return true;
+}
