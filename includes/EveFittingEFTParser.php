@@ -107,6 +107,9 @@ class EveFittingEFTParser {
 			return $firstLine . "<br />" . $fixedEFT;
 		}
 
+		// Remove empty sections
+		$sections = array_filter( $sections );
+
 		$dna = $shipID;
 		// T3 cruisers have subsystems, which will show up as an extra section
 		// The numbers are the typeIDs for the four T3 cruisers.
@@ -127,8 +130,6 @@ class EveFittingEFTParser {
 		}
 
 		// Rigs have to go last, save them for later
-		// FIXME The rig stuff is bugged. It works for now, but could
-		// (probably) break later.
 		$rigs = array_pop($sections);
 
 		// Consolidate and count modules
