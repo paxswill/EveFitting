@@ -67,16 +67,29 @@ class EveFittingEFTParser {
 			}
 			// Split items from charges
 			$exploded = explode( ", ", $line, 1 );
-			// Get the itemID for the item name and save it for later
-			$itemID = static::EveFittingMapTypeID( $exploded[0] );
-			if ( $itemID >= 0 ) {
-				$current[] = $itemID;
-			}
-			// Save the charge for the end
-			if ( count( $exploded ) > 1 ) {
-				$chargeID = static::EveFittingMapTypeID( $charge );
-				if ( $chargeID >= 0 ) {
-					$charges[] = $chargeID;
+			// Drones count as a charge, but are signified by their quantity
+			// being in the form 'Drone_Name x#'
+			if ( preg_match( "/(.+) x([\d+])$/",
+					$exploded[0], $matches ) == 1 ) {
+				// Drone
+				$droneID = static::EveFittingMapTypeID( $matches[1] );
+				$quantity = intval( $matches[2] );
+				// Add drones to the charges array
+				for ( $i = 0; $i < $quantity; $i++ ) {
+					$charges[] = $droneID;
+				}
+			} else {
+				// Get the itemID for the item name and save it for later
+				$itemID = static::EveFittingMapTypeID( $exploded[0] );
+				if ( $itemID >= 0 ) {
+					$current[] = $itemID;
+				}
+				// Save the charge for the end
+				if ( count( $exploded ) > 1 ) {
+					$chargeID = static::EveFittingMapTypeID( $charge );
+					if ( $chargeID >= 0 ) {
+						$charges[] = $chargeID;
+					}
 				}
 			}
 		}
@@ -88,15 +101,6 @@ class EveFittingEFTParser {
 		// If the ship type is invalid, making the DNA is unecessary
 		if ( $shipID < 0 ) {
 			return $firstLine . "<br />" . $fixedEFT;
-		}
-
-		// If there are drones, ignore them
-		$count = count( $sections );
-		if ( count( $sections[$count - 2] ) == 0 &&
-			 count( $sections[$count - 3] ) == 0) {
-			array_pop($sections);
-			array_pop($sections);
-			array_pop($sections);
 		}
 
 		$dna = $shipID;
