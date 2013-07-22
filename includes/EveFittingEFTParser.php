@@ -66,14 +66,14 @@ class EveFittingEFTParser {
 				continue;
 			}
 			// Split items from charges
-			list( $item, $charge ) = explode( ", ", $line );
+			$exploded = explode( ", ", $line, 1 );
 			// Get the itemID for the item name and save it for later
-			$itemID = static::EveFittingMapTypeID( $item );
+			$itemID = static::EveFittingMapTypeID( $exploded[0] );
 			if ( $itemID >= 0 ) {
 				$current[] = $itemID;
 			}
 			// Save the charge for the end
-			if ( $charge != "" ) {
+			if ( count( $exploded ) > 1 ) {
 				$chargeID = static::EveFittingMapTypeID( $charge );
 				if ( $chargeID >= 0 ) {
 					$charges[] = $chargeID;
