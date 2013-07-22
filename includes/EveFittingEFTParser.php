@@ -94,9 +94,9 @@ class EveFittingEFTParser {
 		$count = count( $sections );
 		if ( count( $sections[$count - 2] ) == 0 &&
 			 count( $sections[$count - 3] ) == 0) {
-			pop($sections);
-			pop($sections);
-			pop($sections);
+			array_pop($sections);
+			array_pop($sections);
+			array_pop($sections);
 		}
 
 		$dna = $shipID;
@@ -117,7 +117,7 @@ class EveFittingEFTParser {
 		}
 
 		// Rigs have to go last, save them for later
-		$rigs = pop($sections);
+		$rigs = array_pop($sections);
 
 		// Consolidate and count modules
 		$allSections = array();
