@@ -85,7 +85,8 @@ Result:
 </p>
 
 Clicking the link ("[Viator, Speedy Viator]") in the in-game browser will
-open an in-game fitting window.
+open an in-game fitting window. Well, it would if Github didn't strip the
+Javascript out.
 
 
 ## Known Issues
