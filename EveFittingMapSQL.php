@@ -32,6 +32,9 @@
 class EveFittingMapSQL extends EveFittingEFTParser {
 
 	public static function EveFittingMapTypeID( $name ) {
+		// This may seem really ineffcient, and it probably is on some level,
+		// but it doesn't make an appreciable difference in my (limited)
+		// testing as long as persistent connections are enabled.
 		global $wgEveFittingDatabaseDSN;
 		global $wgEveFittingDatabaseUsername;
 		global $wgEveFittingDatabasePassword;
