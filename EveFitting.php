@@ -35,7 +35,7 @@ $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'Eve Fitting Block',
 	'description' =>
 		'Adds a parser function for Eve Fitting Tool (EFT) blocks',
-	'version' => '0.9.0',
+	'version' => '1.0.0',
 	'author' => 'Will Ross',
 	'url' => 'https://github.com/paxswill/EveFitting',
 );
