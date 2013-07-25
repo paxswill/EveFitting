@@ -87,10 +87,3 @@ Result:
 Clicking the link ("[Viator, Speedy Viator]") in the in-game browser will
 open an in-game fitting window. Well, it would if Github didn't strip the
 Javascript out.
-
-
-## Known Issues
-
-* The in-game fitting window will show "truncated" in red, but no items are
-  missing.
-

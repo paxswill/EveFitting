@@ -192,6 +192,9 @@ class EveFittingEFTParser {
 			}
 		}
 
+		// Not well documented: Ship DNA must end with a double colon
+		$dna = $dna . "::";
+
 		// Make the anchor (link) tag that'll open the fitting window
 		$dnaAnchor =
 			"<a href=\"javascript:CCPEVE.showFitting('" . $dna . "')\">";
